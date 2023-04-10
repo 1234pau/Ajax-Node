@@ -11,6 +11,7 @@ const jsonParser = bodyParse.json();
 const urlEncodedParser = bodyParse.urlencoded({ extended: false });
 app.use(jsonParser);
 app.use(urlEncodedParser);
+
 app.use(cors())
 
 app.use('/api', apiRouter)

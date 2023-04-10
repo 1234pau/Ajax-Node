@@ -20,6 +20,7 @@ let employees = [{
 // GET method
 router.get('/employees', (req, res) => {
     res.json(employees)
+        // message for console**********************
     console.log('GET request')
         // res.json({ msg: 'GET Request is Success' })
 })
@@ -27,21 +28,14 @@ router.get('/employees', (req, res) => {
 // POST method
 router.post('/employees', (request, res) => {
     const employee = {
-            id: request.body.id,
-            first_name: request.body.first_name,
-            last_name: request.body.last_name,
-            email: request.body.email,
-            ip_address: request.body.ip_address
-        }
-        // const employee = {
-        //     id: request.id,
-        //     first_name: request.first_name,
-        //     last_name: request.last_name,
-        //     email: request.email,
-        //     ip_address: request.ip_address
-        // }
-
+        id: request.body.id,
+        first_name: request.body.first_name,
+        last_name: request.body.last_name,
+        email: request.body.email,
+        ip_address: request.body.ip_address
+    }
     employees.push(employee)
+        // message for console**********************
     console.log('POST request')
     res.json({ msg: 'POST Request is Success' })
 })
@@ -60,8 +54,9 @@ router.put('/employees/:id', (req, res) => {
         return employee.id === getId
     })
     employees.splice(employees.indexOf(existingEmployee), 1, updateEmployee)
+        // message for console**********************
     console.log('PUT request')
-        // res.json({ msg: 'PUT Request is Success' })
+    res.json({ msg: 'PUT Request is Success' })
 
 })
 
@@ -69,10 +64,11 @@ router.put('/employees/:id', (req, res) => {
 router.delete('/employees/:id', (req, res) => {
     const getId = req.params.id
     employees = employees.filter((employee) => {
-        return employee.id !== getId
-    })
+            return employee.id !== getId
+        })
+        // message for console**********************
     console.log('DELETE request')
-        // res.json({ msg: 'DELETE Request is Success' })
+    res.json({ msg: 'DELETE Request is Success' })
 })
 
 module.exports = router
