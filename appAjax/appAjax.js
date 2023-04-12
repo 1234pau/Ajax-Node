@@ -1,14 +1,22 @@
 import { BrainHttp } from "./apiDir/brainHttp.js"
+const addemp = document.querySelector(".addemp")
+const close = document.querySelector(".close")
+const dialog = document.querySelector("dialog")
+addemp.addEventListener("click", () => {
+    dialog.showModal()
+})
+close.addEventListener("click", () => {
+    dialog.close()
+})
 
-const getItem = document.querySelector(".get")
-const postItem = document.querySelector(".post")
-const putItem = document.querySelector(".put")
-const deleteItem = document.querySelector(".delete")
+const addEmployee = document.querySelector(".addEmployee") // POST
+const putItem = document.querySelector(".put") // PUT
+const deleteItem = document.querySelector(".delete") // DELETE
 
 const baseURL = "http://127.0.0.1:3000/api"
 
 // GET*************************************
-getItem.addEventListener("click", () => {
+window.addEventListener("DOMContentLoaded", () => { // GET
     fetchAPI()
 })
 
@@ -22,11 +30,15 @@ let fetchAPI = () => {
         for (let x of jsonData) {
             template += `
                         <tr>
-                          <td style="border: 1px solid black">${x.id}</td>
-                          <td style="border: 1px solid black">${x.first_name}</td>
-                          <td style="border: 1px solid black">${x.last_name}</td>
-                          <td style="border: 1px solid black">${x.email}</td>
-                          <td style="border: 1px solid black">${x.ip_address}</td>
+                          <td style="border: 1px solid black; width: 100px;">${x.id}</td>
+                          <td style="border: 1px solid black; width: 100px;">${x.first_name}</td>
+                          <td style="border: 1px solid black; width: 100px;">${x.last_name}</td>
+                          <td style="border: 1px solid black; width: 100px;">${x.email}</td>
+                          <td style="border: 1px solid black; width: 100px;">${x.ip_address}</td>
+                          <td style="border: 1px solid black; width: 100px;">
+                            <button class="put">Update</button>
+                            <button class="delete">Delete</button>
+                          </td>
                         </tr>
                         `
             document.querySelector("tbody").innerHTML = template
@@ -54,7 +66,7 @@ postItem.addEventListener("click", () => {
 
 // PUT***************************************
 putItem.addEventListener("click", () => {
-    let empId = "_lala"
+    let empId = "_abedef"
     let employee = {
         id: empId,
         first_name: "Valery",

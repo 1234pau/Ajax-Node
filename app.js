@@ -1,5 +1,5 @@
 const express = require("express")
-const app = express()
+const app = express() // server
 const bodyParse = require("body-parser")
 const cors = require("cors")
 const apiRouter = require('./api/apiRoute')
@@ -16,7 +16,7 @@ app.use(cors())
 
 app.use('/api', apiRouter)
 
-app.get("/", (req, res) => {
+app.get("/", (req, res) => { // server
     res.send("Hello from server")
 })
 

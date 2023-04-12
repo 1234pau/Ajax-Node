@@ -6,25 +6,74 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajax app</title>
+    <style>
+        form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 10px;
+        }
+        
+        input {
+            width: 300px;
+            height: 30px;
+            margin: 5px;
+        }
+        
+        button {
+            width: 100px;
+            height: 50px;
+        }
+        
+        dialog {
+            margin: auto;
+            width: 50%;
+            height: 60%;
+            border: none;
+            border-radius: 2px;
+            padding: 10px;
+            background-color: #dfdddd;
+            position: absolute;
+            z-index: 3;
+            overflow-x: hidden;
+        }
+        
+        dialog::-webkit-backdrop {
+            background: rgba(0, 0, 0, 0.7);
+            opacity: 0.8;
+        }
+        
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.7);
+            opacity: 0.9;
+        }
+    </style>
 </head>
 
 <body>
-    <button class="get">GET</button>
-    <button class="post">POST</button>
-    <button class="put">PUT</button>
-    <button class="delete">DELETE</button>
+    <button class="addemp">Add Employee</button>
+    <dialog>
+        <button class="close">X</button>
+        <form>
+            <input type="text" placeholder="id">
+            <input type="text" placeholder="first name">
+            <input type="text" placeholder="last name">
+            <input type="text" placeholder="email">
+            <input type="text" placeholder="ip addres">
+            <input class="addEmployee" type="submit" value="Send data">
+        </form>
+    </dialog>
 
-
-
-
-    <table style="border: 1px solid black; width: 90%; margin-top: 20px;">
+    <table style="border: 1px solid black; min-width: 100%; margin-top: 20px;">
         <thead>
             <tr>
-                <th style="border: 1px solid black">ID</th>
-                <th style="border: 1px solid black">FIRST NAME</th>
-                <th style="border: 1px solid black">LAST NAME</th>
-                <th style="border: 1px solid black">EMAIL</th>
-                <th style="border: 1px solid black">IP ADDRES</th>
+                <th style="border: 1px solid black; width: 100px; height: 50px;">ID</th>
+                <th style="border: 1px solid black; width: 100px; height: 50px;">FIRST NAME</th>
+                <th style="border: 1px solid black; width: 100px; height: 50px;">LAST NAME</th>
+                <th style="border: 1px solid black; width: 100px; height: 50px;">EMAIL</th>
+                <th style="border: 1px solid black; width: 100px; height: 50px;">IP ADDRES</th>
+                <th style="border: 1px solid black; width: 100px; height: 50px;">ACTIONS</th>
             </tr>
         </thead>
         <tbody>
