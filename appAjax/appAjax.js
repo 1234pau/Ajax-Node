@@ -2,16 +2,19 @@ import { BrainHttp } from "./apiDir/brainHttp.js"
 const addemp = document.querySelector(".addemp")
 const close = document.querySelector(".close")
 const dialog = document.querySelector("dialog")
+const close_ = document.querySelector(".close_")
+const modalUpdate = document.querySelector(".modalUpdate")
 addemp.addEventListener("click", () => {
     dialog.showModal()
 })
 close.addEventListener("click", () => {
     dialog.close()
 })
+close_.addEventListener("click", () => {
+    modalUpdate.close()
+})
 
 const addEmployee = document.querySelector(".addEmployee") // POST
-const putItem = document.querySelector(".put") // PUT
-const deleteItem = document.querySelector(".delete") // DELETE
 
 const baseURL = "http://127.0.0.1:3000/api"
 
@@ -46,15 +49,23 @@ let fetchAPI = () => {
 
     })
 }
-
-// POST*************************************
-postItem.addEventListener("click", () => {
+const createID = () => {
+        return '_' + Math.random().toString(36).substr(2, 9)
+    }
+    // POST*************************************
+const id = document.querySelector(".id")
+const first_name = document.querySelector(".first_name")
+const last_name = document.querySelector(".last_name")
+const email = document.querySelector(".email")
+const ip_addres = document.querySelector(".ip_addres")
+addEmployee.addEventListener("click", (e) => {
+    e.preventDefault()
     let employee = {
-        id: '_lala',
-        first_name: "Lebron",
-        last_name: "Carasas",
-        email: 'lebron@gmail.com',
-        ip_address: '447.330.330.31'
+        id: createID(),
+        first_name: first_name.value,
+        last_name: last_name.value,
+        email: email.value,
+        ip_address: ip_addres.value
     }
     let http = new BrainHttp();
     let URL = `${baseURL}/employees`;
@@ -62,33 +73,81 @@ postItem.addEventListener("click", () => {
         fetchAPI()
         console.log(jsonData)
     })
+    id.value = ""
+    first_name.value = "",
+        last_name.value = "",
+        email.value = "",
+        ip_addres.value = ""
+    dialog.close()
 })
 
 // PUT***************************************
-putItem.addEventListener("click", () => {
-    let empId = "_abedef"
-    let employee = {
-        id: empId,
-        first_name: "Valery",
-        last_name: "Caragea",
-        email: 'valy@gmail.com',
-        ip_address: '00000000000'
+const id_ = document.querySelector(".id_")
+const first_name_ = document.querySelector(".first_name_")
+const last_name_ = document.querySelector(".last_name_")
+const email_ = document.querySelector(".email_")
+const ip_addres_ = document.querySelector(".ip_addres_")
+const tbody_tag = document.querySelector(".tbody_tag")
+const addEmployee_ = document.querySelector(".addEmployee_")
+tbody_tag.addEventListener("click", (e) => {
+    const getUpdateButton = e.target
+    if (getUpdateButton.className === "put") {
+        const selectedEmp = getUpdateButton.parentElement.parentElement.firstElementChild.innerHTML
+        console.log(selectedEmp)
+        let http = new BrainHttp();
+        let URL = `${baseURL}/employees`;
+        http.get(URL, (err, jsonData) => {
+            if (err) throw err
+
+            let selectedId = jsonData.find((x) => {
+                return x.id === selectedEmp.trim()
+            })
+            console.log(selectedId)
+                // id_.value = selectedId.id
+                // first_name_.value = selectedId.first_name
+                // last_name_.value = selectedId.last_name
+                // email_.value = selectedId.email
+                // ip_addres_.value = selectedId.ip_address
+        })
+        modalUpdate.showModal()
+
+    } else if (getUpdateButton.className === "delete") {
+        const selectedEmp = getUpdateButton.parentElement.parentElement.firstElementChild.innerHTML
+        console.log(selectedEmp)
+        let http = new BrainHttp();
+        let URL = `${baseURL}/employees/${selectedEmp.trim()}`;
+        http.delete(URL, (jsonData) => {
+            console.log(jsonData)
+            fetchAPI()
+        })
     }
-    let http = new BrainHttp();
-    let URL = `${baseURL}/employees/${empId}`;
-    http.put(URL, employee, (jsonData) => {
-        fetchAPI()
-        console.log(jsonData)
-    })
 })
 
+// let empId = id_.value.trim()
+// let newEmployee = {
+//     first_name: first_name_.value,
+//     last_name: last_name_.value,
+//     email: email_.value,
+//     ip_address: ip_addres_.value
+// }
+// addEmployee_.addEventListener("click", (e) => {
+//     e.preventDefault()
+//     let http = new BrainHttp();
+//     let URL = `${baseURL}/employees/${empId}`;
+//     http.put(URL, newEmployee, (jsonData) => {
+//         fetchAPI()
+//         console.log(jsonData)
+//     })
+//     modalUpdate.close()
+// })
+
 // DELETE************************************
-deleteItem.addEventListener("click", () => {
-    let empId = "_lala"
-    let http = new BrainHttp();
-    let URL = `${baseURL}/employees/${empId}`;
-    http.delete(URL, (jsonData) => {
-        console.log(jsonData)
-        fetchAPI()
-    })
-})
+// deleteItem.addEventListener("click", () => {
+//     let empId = "_lala"
+//     let http = new BrainHttp();
+//     let URL = `${baseURL}/employees/${empId}`;
+//     http.delete(URL, (jsonData) => {
+//         console.log(jsonData)
+//         fetchAPI()
+//     })
+// })

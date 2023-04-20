@@ -56,12 +56,24 @@
     <dialog>
         <button class="close">X</button>
         <form>
-            <input type="text" placeholder="id">
-            <input type="text" placeholder="first name">
-            <input type="text" placeholder="last name">
-            <input type="text" placeholder="email">
-            <input type="text" placeholder="ip addres">
+            <!-- <input class="id" type="text" placeholder="id"> -->
+            <input class="first_name" type="text" placeholder="first name">
+            <input class="last_name" type="text" placeholder="last name">
+            <input class="email" type="text" placeholder="email">
+            <input class="ip_addres" type="text" placeholder="ip addres">
             <input class="addEmployee" type="submit" value="Send data">
+        </form>
+    </dialog>
+
+    <dialog class="modalUpdate">
+        <button class="close_">X</button>
+        <form>
+            <input class="id_" type="text" placeholder="id">
+            <input class="first_name_" type="text" placeholder="first name">
+            <input class="last_name_" type="text" placeholder="last name">
+            <input class="email_" type="text" placeholder="email">
+            <input class="ip_addres_" type="text" placeholder="ip addres">
+            <input class="addEmployee_" type="submit" value="Update data">
         </form>
     </dialog>
 
@@ -76,7 +88,7 @@
                 <th style="border: 1px solid black; width: 100px; height: 50px;">ACTIONS</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="tbody_tag">
 
         </tbody>
     </table>
